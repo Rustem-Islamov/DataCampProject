@@ -6,7 +6,7 @@ import rampwf as rw
 from sklearn.model_selection import TimeSeriesSplit
 
 problem_title = 'French Presidential Elections'
-_target_column_name = 'log_bike_count'
+_target_column_name = 'Voix'
 # A type (class) which will be used to create wrapper objects for y_pred
 Predictions = rw.prediction_types.make_regression()
 # An object implementing the workflow
@@ -27,18 +27,18 @@ def get_cv(X, y, random_state=0):
 
 
 def _read_data(path, f_name):
-    data = pd.read_parquet(os.path.join(path, 'data', f_name))
-    data = data.sort_values(["date", "counter_name"])
+    data = pd.read_csv(os.path.join(path, 'data', f_name))
+    data = data.sort_values(["Code de la commune"])
     y_array = data[_target_column_name].values
-    X_df = data.drop([_target_column_name, 'bike_count'], axis=1)
+    X_df = data.drop([_target_column_name, ''], axis=1)
     return X_df, y_array
 
 
 def get_train_data(path='.'):
-    f_name = 'train.parquet'
+    f_name = 'train_data.csv'
     return _read_data(path, f_name)
 
 
 def get_test_data(path='.'):
-    f_name = 'test.parquet'
+    f_name = 'test_data.csv'
     return _read_data(path, f_name)
