@@ -1,5 +1,8 @@
-# DataCampProject
-Team Data Camp project 2023 
+# Data Camp Project
+
+Authors : Morvan Theo, Islamov Rustem, Popov Nicolai, Mehdy Bennani, Wasik Thomas, Bouley Alexis
+
+This challenge was done as a project for the Master 2 Data Science (2022/2023), DATACAMP course
 
 Links to get the data used in this project
 - 2022 elections results : https://www.data.gouv.fr/fr/datasets/election-presidentielle-des-10-et-24-avril-2022-resultats-definitifs-du-1er-tour/, download the txt file "resultats-par-niveau-burvot
