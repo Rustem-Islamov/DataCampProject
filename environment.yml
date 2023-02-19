@@ -1,4 +1,4 @@
-name: ramp-covid-vaccine
+name: ramp-french-presidential-elections-2022
 channels:
   - conda-forge
   - defaults
