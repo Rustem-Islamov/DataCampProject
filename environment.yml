@@ -1,0 +1,27 @@
+name: ramp-covid-vaccine
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - numpy
+  - scikit-learn>=0.22
+  - scipy
+  - click
+  - pandas
+  - matplotlib
+  - seaborn
+
+  # Extra requirements
+  - tensorflow-gpu
+  - pytorch
+  - keras
+  - lightgbm
+
+  - pip
+  - pip:
+    - osfclient
+    - ramp-workflow
+    - ramp-utils
+
+    # Extra requirements pip
+    - xgboost

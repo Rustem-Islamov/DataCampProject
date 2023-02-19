@@ -1,0 +1,8 @@
+numpy
+scikit-learn
+pandas
+matplotlib
+seaborn
+ramp-workflow
+osfclient
+xgboost
