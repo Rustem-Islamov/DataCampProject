@@ -1,6 +1,6 @@
 # Data Camp Project
 
-Authors : [Morvan Theo](https://github.com/Theo-Morvan), [Islamov Rustem](https://github.com/Rustem-Islamov), [Popov Nicolai](https://github.com/k0l1ka), Mehdy Bennani, Wasik Thomas, Bouley Alexis
+Authors : [Morvan Theo](https://github.com/Theo-Morvan), [Islamov Rustem](https://github.com/Rustem-Islamov), [Popov Nicolai](https://github.com/k0l1ka), Wasik Thomas, Bouley Alexis
 
 This challenge was done as a project for the Master 2 Data Science (2022/2023), DATACAMP course
 
