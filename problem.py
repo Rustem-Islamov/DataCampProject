@@ -3,10 +3,21 @@ import os
 import numpy as np
 import pandas as pd
 import rampwf as rw
-from sklearn.model_selection import TimeSeriesSplit
+from sklearn.model_selection import KFold
 
 problem_title = 'French Presidential Elections'
 _target_column_name = 'Voix'
+columns_to_be_used = [
+    'Code du département', 'Libellé du département',
+       'Code de la circonscription', 'Libellé de la circonscription',
+       'Code de la commune', 'Libellé de la commune', 'Code du b.vote',
+       'Inscrits', 'Votants', 'location'
+]
+excluded_territories = ['Français établis hors de France',
+    'Wallis et Futuna', 'Guyane', 'Saint-Pierre-et-Miquelon', 'Mayotte',
+    'Saint-Martin/Saint-Barthélemy', 'Polynésie française',
+    'Nouvelle-Calédonie'
+]
 # A type (class) which will be used to create wrapper objects for y_pred
 Predictions = rw.prediction_types.make_regression()
 # An object implementing the workflow
@@ -18,7 +29,7 @@ score_types = [
 
 
 def get_cv(X, y, random_state=0):
-    cv = TimeSeriesSplit(n_splits=8)
+    cv = KFold(n_splits=8)
     rng = np.random.RandomState(random_state)
 
     for train_idx, test_idx in cv.split(X):
@@ -27,15 +38,24 @@ def get_cv(X, y, random_state=0):
 
 
 def _read_data(path, f_name):
-    data = pd.read_csv(os.path.join(path, 'data', f_name))
+    data = pd.read_csv(os.path.join(path, 'data', f_name),sep=';')
+    data = data[columns_to_be_used+[_target_column_name]]
+    data = _filter_data(data)
+    data['Code de la commune'] = data['Code de la commune'].astype(str)
     data = data.sort_values(["Code de la commune"])
     y_array = data[_target_column_name].values
-    X_df = data.drop([_target_column_name, ''], axis=1)
+    X_df = data.drop(columns=[_target_column_name])
     return X_df, y_array
 
+def _filter_data(data):
+    data = data.copy()
+    data = data[~data['Libellé du département'].isin([
+        excluded_territories
+        ])]
+    return data
 
 def get_train_data(path='.'):
-    f_name = 'train_data.csv'
+    f_name = 'elections-france-presidentielles-2022-1er-tour-par-bureau-de-vote.csv'
     return _read_data(path, f_name)
 
 
