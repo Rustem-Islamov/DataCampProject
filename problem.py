@@ -9,7 +9,7 @@ import math
 
 problem_title = "French Presidential Elections"
 _target_column_name = "Voix"
-_name_candidate = "MACRON"
+name_candidates = ["MACRON","MELENCHON","LE PEN"] 
 columns_to_be_used = [
     "Code du département",
     "Libellé du département",
@@ -53,7 +53,7 @@ def get_cv(X, y, random_state=0):
 
 def _read_data(path, f_name):
     data = pd.read_csv(os.path.join(path, "data", f_name), sep=";", low_memory=False)
-    data = data[data['Nom']==_name_candidate.upper()]
+    data = data[data['Nom'].isin(name_candidates)]
     data = data[columns_to_be_used + [_target_column_name]]
     data = _filter_data(data)
     data["Code de la commune"] = data["Code de la commune"].astype(str)
