@@ -6,7 +6,7 @@ This challenge was done as a project for the Master 2 Data Science (2022/2023), 
 
 ## Introduction
 
-The goal of this project is to predict the results of 2022 French presidental elections. For this, we use different sources of data that are described later. 
+The goal of this project is to predict the results of 2022 French presidental elections. For this, we use different sources of data that are described later. The participants should predict the number of votes that were given for Emmanuel Macron, Marine Le Pen, and Jean-Luc Mélenchon in several cities of France.
 
 ### Data
 The data used in the project is open, links to download the data used in this project
