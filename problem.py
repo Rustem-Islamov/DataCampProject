@@ -8,7 +8,9 @@ import ipdb
 import math
 
 problem_title = "French Presidential Elections"
+
 _target_column_name = "Voix"
+
 _name_candidate = "MACRON"
 columns_to_be_used = [
     "Code du département",
@@ -49,6 +51,17 @@ def get_cv(X, y, random_state=0):
     for train_idx, test_idx in cv.split(X):
         # Take a random sampling on test_idx so it's that samples are not consecutives.
         yield train_idx, rng.choice(test_idx, size=len(test_idx) // 3, replace=False)
+
+def _read_data(path, f_name):
+    data = pd.read_csv(os.path.join(path, "data", f_name), sep=";", low_memory=False)
+    data = data[data['Nom']==_name_candidate.upper()]
+    data = data[columns_to_be_used + [_target_column_name]]
+    data = _filter_data(data)
+    data["Code de la commune"] = data["Code de la commune"].astype(str)
+    data = data.sort_values(["Code de la commune"])
+    y_array = data[_target_column_name].values
+    X_df = data.drop(columns=[_target_column_name])
+    return X_df, y_array
 
 
 def get_train_data(path="."):
